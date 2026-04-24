@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Daily Stocks - Sea Meat</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #00695c;
+            margin-bottom: 10px;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #004d40;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e0f2f1;
+        }
+        @media (max-width: 600px) {
+            table {
+                width: 100%;
+            }
+            th, td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Fresh Daily Stocks</h1>
+    <p>Welcome to Sea Meat's fresh daily stocks page. Here you can find the latest availability of our seafood products.</p>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Stock Quantity</th>
+            <th>Price per Unit</th>
+        </tr>
+        <tr>
+            <td>Fresh Salmon</td>
+            <td>50 lbs</td>
+            <td>$15.99</td>
+        </tr>
+        <tr>
+            <td>Tuna Fillets</td>
+            <td>30 lbs</td>
+            <td>$12.49</td>
+        </tr>
+        <tr>
+            <td>Shrimp</td>
+            <td>20 lbs</td>
+            <td>$18.99</td>
+        </tr>
+        <tr>
+            <td>Lobster Tails</td>
+            <td>10 lbs</td>
+            <td>$25.99</td>
+        </tr>
+    </table>
+    <p>Last updated: <script>document.write(new Date().toLocaleDateString());</script></p>
+</body>
+</html>

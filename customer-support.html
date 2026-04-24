@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support - Sea Me</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .support-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .contact-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .contact-info {
+            background: #f0f4ff;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-top: 2rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info strong {
+            color: #667eea;
+            margin-right: 0.5rem;
+        }
+        
+        .faq-section {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .faq-section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .faq-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .faq-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .faq-item p {
+            color: #666;
+            display: none;
+            margin-top: 0.5rem;
+        }
+        
+        .faq-item.active p {
+            display: block;
+        }
+        
+        .live-chat-section {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .live-chat-section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .chat-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .chat-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            border: 2px solid #ddd;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message.agent {
+            justify-content: flex-start;
+        }
+        
+        .message.user {
+            justify-content: flex-end;
+        }
+        
+        .message-bubble {
+            max-width: 70%;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .agent .message-bubble {
+            background: #667eea;
+            color: white;
+            border-bottom-left-radius: 2px;
+        }
+        
+        .user .message-bubble {
+            background: #e0e0e0;
+            color: #333;
+            border-bottom-right-radius: 2px;
+        }
+        
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 2px solid #ddd;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chat-input-area input {
+            flex: 1;
+            margin: 0;
+            height: 40px;
+        }
+        
+        .chat-input-area button {
+            padding: 0.5rem 1rem;
+            width: auto;
+            margin: 0;
+        }
+        
+        .chat-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .status-badge.offline {
+            background: #ef4444;
+            animation: none;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .info-box h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .response-time {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chat-container {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-section h2, .faq-section h2, .live-chat-section h2 {
+                font-size: 1.4rem;
+            }
+            
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Customer Support</h1>
+        <p>We're here to help! Get in touch with us anytime.</p>
+    </header>
+    
+    <div class="container">
+        <div class="support-grid">
+            <!-- Contact Form Section -->
+            <div class="contact-section">
+                <h2>Contact Us</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="billing">Billing Issue</option>
+                            <option value="technical">Technical Support</option>
+                            <option value="account">Account Help</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit">Send Message</button>
+                </form>
+                
+                <div class="contact-info">
+                    <h3>Other Ways to Reach Us</h3>
+                    <p><strong>Email:</strong> support@seamе.com</p>
+                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p><strong>Hours:</strong> Mon-Fri, 9:00 AM - 6:00 PM EST</p>
+                </div>
+            </div>
+            
+            <!-- Live Chat Support Section -->
+            <div class="live-chat-section" style="grid-column: auto; grid-row: auto;">
+                <h2>Live Chat Support</h2>
+                <div class="info-box">
+                    <h3><span class="status-badge"></span>We're Online!</h3>
+                    <p>Average response time: Less than 2 minutes</p>
+                    <p class="response-time">Our support team is ready to assist you.</p>
+                </div>
+                
+                <div class="chat-container">
+                    <div class="chat-box">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message agent">
+                                <div class="message-bubble">Hi! 👋 How can we help you today?</div>
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <input type="text" id="chatInput" placeholder="Type your message...">
+                            <button onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-info">
+                        <div class="info-box">
+                            <h3>Support Team</h3>
+                            <p>📞 Phone Support</p>
+                            <p>Available 24/7</p>
+                        </div>
+                        <div class="info-box">
+                            <h3>Quick Links</h3>
+                            <p>• Knowledge Base</p>
+                            <p>• Documentation</p>
+                            <p>• Community Forum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>❓ How do I create an account?</h3>
+                        <p>Click on the "Sign Up" button, fill in your details, and verify your email. You'll be able to access all features immediately!</p>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>💳 What payment methods do you accept?</h3>
+                        <p>We accept all major credit cards, PayPal, Apple Pay, Google Pay, and bank transfers. Your payment information is secured with SSL encryption.</p>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>🔄 Can I cancel my subscription anytime?</h3>
+                        <p>Yes! You can cancel your subscription at any time from your account settings. No questions asked, no hidden fees.</p>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>🔒 Is my data secure?</h3>
+                        <p>Absolutely. We use industry-standard encryption and comply with GDPR and CCPA regulations. Your privacy is our priority.</p>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>🚀 How do I get started with the service?</h3>
+                        <p>After signing up, complete your profile, configure your preferences, and you're ready to go! Check our tutorial for a quick walkthrough.</p>
+                    </div>
+                    
+                    <div class="faq-item" onclick="toggleFAQ(this)">
+                        <h3>📧 How often will I receive emails?</h3>
+                        <p>We send important updates and notifications based on your preferences. You can customize your email settings anytime in your account.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleFAQ(element) {
+            element.classList.toggle('active');
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.innerHTML = '<div class="message-bubble">' + escapeHtml(message) + '</div>';
+            chatMessages.appendChild(userMsg);
+            
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Simulate agent response
+            setTimeout(() => {
+                const agentMsg = document.createElement('div');
+                agentMsg.className = 'message agent';
+                agentMsg.innerHTML = '<div class="message-bubble">Thank you for your message! A support agent will respond shortly. ✨</div>';
+                chatMessages.appendChild(agentMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 500);
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Allow sending messages with Enter key
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Handle contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for contacting us! We will get back to you shortly.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
